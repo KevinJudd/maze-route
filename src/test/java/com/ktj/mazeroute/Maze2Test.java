@@ -38,7 +38,6 @@ public class Maze2Test {
         boolean foundIt = maze.findRoute();
         assertTrue(foundIt);
         Utils.printAMaze(maze.getMaze());
-        assertEquals(maze.retrieveMazeLocation(new Coordinate(1, 4)).getStatus(), LocationStatus.dead_end);
 
     }
 
