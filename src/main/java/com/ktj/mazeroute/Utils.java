@@ -18,7 +18,7 @@ public class Utils {
     private static Logger logger = LoggerFactory.getLogger(Utils.class);
 
     public static Location[][] buildALocationArray(List<String> list){
-        int rows =  list.size();
+        int rows = 0;
         int columns = 0;
         // first get the dimensions so we can initialize the array.
         for (String line: list){
@@ -26,6 +26,7 @@ public class Utils {
                 logger.warn("Ignoring 0 length line from file.");
                 continue;
             }
+            rows += 1;
             if (columns ==  0){
                 columns = line.length();
             }
@@ -106,5 +107,29 @@ public class Utils {
         dimens[1] = locationArray[0].length;
         return dimens;
 
+    }
+
+    public static int countSteps(Location[][] locationArray){
+        int steps = 0;
+        for (int row=0;  row < locationArray.length; row ++){
+            Location[] rowOfLocs = locationArray[row];
+            for (int col = 0; col < rowOfLocs.length; col++){
+                if (rowOfLocs[col].getStatus().equals(LocationStatus.step )){
+                    steps += 1;
+                }
+            }
+        }
+        return steps;
+    }
+
+    public static void printAMaze(Location[][] locationArray){
+        for (int row=0;  row < locationArray.length; row ++){
+            Location[] rowOfLocs = locationArray[row];
+            StringBuilder builder = new StringBuilder(" ");
+            for (int col = 0; col < rowOfLocs.length; col++){
+                builder.append(LocationStatus.toFileToken(rowOfLocs[col].getStatus()));
+            }
+            logger.info(builder.toString());
+        }
     }
 }

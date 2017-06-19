@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * This class describes a single Map Coordinate.
  * Row and Columnn follow Java convention and begin with zero.
  */
-@ToString(includeFieldNames = true)
+@ToString(includeFieldNames = true, exclude = { "logger"})
 @NoArgsConstructor
 @Data()
 public class Coordinate {
@@ -21,6 +21,11 @@ public class Coordinate {
     private int row;
     private int column;
 
+    /**
+     * row and column are actually java index; 0 based.
+     * @param row
+     * @param column
+     */
     public Coordinate(int row, int column){
         this.row = row;
         this.column =column;
@@ -30,10 +35,10 @@ public class Coordinate {
         return row ==0;
     }
     public boolean isEastOOB(int mazeNumberColumns){
-        return column >= mazeNumberColumns;
+        return column >= (mazeNumberColumns - 1);
     }
     public boolean isSouthOOB(int mazeNumberRows){
-        return row >= mazeNumberRows;
+        return row >= (mazeNumberRows - 1);
     }
     public boolean isWestOOB(){
         return column == 0;
