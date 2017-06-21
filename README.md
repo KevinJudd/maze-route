@@ -43,4 +43,5 @@ MNMINOF2MAC007:~ kjudd$
 ```
 The small json return above is a two by two maze.
 
-At this point the maze router is run.
+At this point the maze router web app is running.
+

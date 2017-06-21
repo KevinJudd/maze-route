@@ -108,16 +108,5 @@
         </plugins>
 
     </build>
-    <distributionManagement>
-        <repository>
-            <id>services-releases</id>
-            <url>https://nexus.lakana.com/content/repositories/services-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>services-snapshots</id>
-            <url>https://nexus.lakana.com/content/repositories/services-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
 
 </project>

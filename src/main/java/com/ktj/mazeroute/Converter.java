@@ -4,11 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <p>
- * Title: 	Lakana Java Architecture<br />
- * Company: 	Lakana, Inc.<br />
- * Copyright: 	Copyright 2015
- * </p>
  * Description:
  */
 public class Converter {

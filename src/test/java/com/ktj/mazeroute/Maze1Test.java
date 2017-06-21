@@ -11,11 +11,6 @@ import java.io.IOException;
 import static org.testng.Assert.*;
 
 /**
- * <p>
- * Title: 	Lakana Java Architecture<br />
- * Company: 	Lakana, Inc.<br />
- * Copyright: 	Copyright 2015
- * </p>
  * Description:
  */
 public class Maze1Test {

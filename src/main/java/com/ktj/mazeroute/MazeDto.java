@@ -7,11 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * <p>
- * Title: 	Lakana Java Architecture<br />
- * Company: 	Lakana, Inc.<br />
- * Copyright: 	Copyright 2015
- * </p>
  * Description:
  */
 @ToString(includeFieldNames = true)

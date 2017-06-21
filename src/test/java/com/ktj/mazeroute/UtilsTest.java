@@ -12,12 +12,7 @@ import java.io.IOException;
 import static org.testng.Assert.*;
 
 /**
- * <p>
- * Title: 	Lakana Java Architecture<br />
- * Company: 	Lakana, Inc.<br />
- * Copyright: 	Copyright 2015
- * </p>
- * Description:
+ *  * Description:
  */
 public class UtilsTest {
     private Logger logger = LoggerFactory.getLogger(UtilsTest.class);

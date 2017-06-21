@@ -12,11 +12,6 @@ import org.springframework.context.annotation.Bean;
 
 
 /**
- * <p>
- * Title: 	Lakana Java Architecture<br />
- * Company: 	Lakana, Inc.<br />
- * Copyright: 	Copyright 2015
- * </p>
  * Description:
  */
 @SpringBootApplication

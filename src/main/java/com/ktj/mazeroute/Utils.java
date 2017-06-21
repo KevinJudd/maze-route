@@ -7,11 +7,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * <p>
- * Title: 	Lakana Java Architecture<br />
- * Company: 	Lakana, Inc.<br />
- * Copyright: 	Copyright 2015
- * </p>
  * Description:
  */
 public class Utils {

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * </p>
  * Description:
  * This class describes a single Map Coordinate.
- * Row and Columnn follow Java convention and begin with zero.
+ * Row and Column follow Java convention and begin with zero.
  */
 @ToString(includeFieldNames = true, exclude = { "logger"})
 @NoArgsConstructor
