@@ -4,7 +4,7 @@ package com.ktj.mazeroute;
  * Description:
  * The Status of a location.  Within a map route, any location can have only one status.
  */
-public enum LocationStatus {
+public enum     LocationStatus {
     start, end, open, step, dead_end, obstruction;
 
     public static LocationStatus translateFileToken(char token){
