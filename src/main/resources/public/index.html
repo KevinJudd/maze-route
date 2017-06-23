@@ -3,30 +3,76 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-    var demoUrl = "http://127.0.0.1:8080/demo";
-    alert("page is loaded and ready to test with demoURL " + demoUrl);
-    $("button").click(function(){
-        alert("In button click function");
-        $.get( demoUrl, function(data) {
-          alert("Data stepsInRoute=" + data.stepsInRoute);
-          $("body")
-            .append("<p>stepsInRoute=" + data.stepsInRoute + "</p>");
-          $.each( data.maze, function(rowNum, statusArray) {
-            alert("(row):" + rowNum + ": " + statusArray);
-            $.each(statusArray, function(column, stati){
-                for (k in stati) {
-                  alert(column + ":" + k + ":" + stati[k]);// k is "status"
-                }
-            })
-          });
-        }, "json");
-    });  // end of click function
-  });  //  end of document ready function
+  var redSquare = "https://upload.wikimedia.org/wikipedia/commons/5/5c/Red-square.gif";
+  var cyanSquare = "https://upload.wikimedia.org/wikipedia/commons/3/3d/Cyan-square.png";
+  var magentaSquare = "https://upload.wikimedia.org/wikipedia/commons/9/9d/Magenta-square.gif";
+  var whiteSquare = "https://upload.wikimedia.org/wikipedia/commons/1/1c/Square.gif";
+  var noEntry = "http://127.0.0.1:8080/images/no-entry.gif";
+  var woodenFence = "http://127.0.0.1:8080/images/wooden-fence.jpg";
+  var footprint = "https://upload.wikimedia.org/wikipedia/commons/9/9a/Barfotrevyenslogo.jpg";
+  function calcImageSrc(step) {
+    let imgSrc = (step == "start") ? redSquare :
+      (step == "end") ? cyanSquare :
+      (step == "obstruction") ? woodenFence:
+      (step == "open") ?  whiteSquare:
+      (step == "step") ? footprint :
+      (step == "dead_end") ? noEntry:
+      "dontknow";
+    return imgSrc;
+  }
+  function demoDisplayFunction(){
+    alert("In demoDisplayFunction");
+    $.get( "http://127.0.0.1:8080/demo", function(data) {
+      alert("Data stepsInRoute=" + data.stepsInRoute);
+      $("body")
+        .append("<p>stepsInRoute=" + data.stepsInRoute + "</p>");
+      $("body").append("<div><table>")
+      $.each( data.maze, function(rowNum, statusArray) {
+        alert("(row):" + rowNum + ": " + statusArray);
+        $("body").append("<tr>");
+        $.each(statusArray, function(column, stati){
+            for (k in stati) {
+              alert(column + ":" + k + ":" + stati[k]);// k is "status"
+              $("body").append("<td><img src=\"" + calcImageSrc(stati[k]) + "\" alt=\"" + stati[k]
+                  + "\" border=1 height=20 width=20></img></td>");
+            }
+        })
+        $("body").append("</tr>");
+      });
+      $("body").append("</table></div>");
+    }, "json");
+  }
+  function mazeDisplayFunction(mazeNum){
+    var url = "http://127.0.0.1:8080/solve/" + mazeNum;
+    alert("run with url = " + url);
+    $.get( url, function(data) {
+      $("body")
+        .append("<p>stepsInRoute=" + data.stepsInRoute + "</p>");
+      $("body").append("<div><table>")
+      $.each( data.maze, function(rowNum, statusArray) {
+        $("body").append("<tr>");
+        $.each(statusArray, function(column, stati){
+            for (k in stati) {
+              $("body").append("<td><img src=\"" + calcImageSrc(stati[k]) + "\" alt=\"" + stati[k]
+                  + "\" border=1 height=20 width=20></img></td>");
+            }
+        })
+        $("body").append("</tr>");
+      });
+      $("body").append("</table></div>");
+    }, "json");
+  }
 </script>
 </head>
 <body>
-<p><button>Test demo</button></p>
-
+<!-- <p><button>Test demo</button></p>
+-->
+<p onclick="demoDisplayFunction()"><button>Solve Demo Maze</button></p>
+<table>
+  <tr>
+    <td><div onclick="mazeDisplayFunction(1)"><button>Solve Small Maze</button></td>
+    <td></div><div onclick="mazeDisplayFunction(2)"><button>Solve Medium Maze</button></div></td>
+    <td><div onclick="mazeDisplayFunction(3)"><button>Solve Large Maze</button></div></td>
+  </table>
 </body>
 </html>
