@@ -3,10 +3,7 @@ package com.ktj.mazeroute;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -25,12 +22,14 @@ public class MazeController {
 
     Converter converter = new Converter();
 
+    @CrossOrigin
     @RequestMapping(value = "/demo", produces = "application/json")
     public MazeDto displayDemoMaze(){
         return demoMaze();
     }
 
     protected MazeDto demoMaze(){
+        logger.info("In demoMaze()");
         Location[][] locations = new Location[2][2];
         locations[0][0] = new Location(LocationStatus.start);
         locations[0][1] = new Location(LocationStatus.obstruction);
@@ -42,6 +41,7 @@ public class MazeController {
         return converter.convert(maze);
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/solve/{fileNumber}", produces = "application/json")
     public MazeDto solveFileMaze(HttpServletRequest request, @PathVariable String fileNumber) throws URISyntaxException {
 
