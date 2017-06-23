@@ -45,3 +45,7 @@ The small json return above is a two by two maze.
 
 At this point the maze router web app is running.
 
+Access the app by running the following from a browser on your computer:
+`http://localhost:8080/index.html`
+
+
