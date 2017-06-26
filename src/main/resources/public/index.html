@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+table.picker { border: 10px solid black; }
+tr.picker {border: 5px solid black; }
+button.picker { background-color: red; margin: 5px; }
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script type="text/javascript">
   "use strict";
-  var redSquare = "https://upload.wikimedia.org/wikipedia/commons/5/5c/Red-square.gif";
-  var cyanSquare = "https://upload.wikimedia.org/wikipedia/commons/3/3d/Cyan-square.png";
-  var magentaSquare = "https://upload.wikimedia.org/wikipedia/commons/9/9d/Magenta-square.gif";
-  var whiteSquare = "https://upload.wikimedia.org/wikipedia/commons/1/1c/Square.gif";
-  var noEntry = "http://127.0.0.1:8080/images/no-entry.gif";
-  var woodenFence = "http://127.0.0.1:8080/images/wooden-fence.jpg";
-  var footprint = "https://upload.wikimedia.org/wikipedia/commons/9/9a/Barfotrevyenslogo.jpg";
   function calcImageSrc(step) {
+    var redSquare = "https://upload.wikimedia.org/wikipedia/commons/5/5c/Red-square.gif";
+    var cyanSquare = "https://upload.wikimedia.org/wikipedia/commons/3/3d/Cyan-square.png";
+    var magentaSquare = "https://upload.wikimedia.org/wikipedia/commons/9/9d/Magenta-square.gif";
+    var whiteSquare = "https://upload.wikimedia.org/wikipedia/commons/1/1c/Square.gif";
+    var noEntry = "http://127.0.0.1:8080/images/no-entry.gif";
+    var woodenFence = "http://127.0.0.1:8080/images/wooden-fence.jpg";
+    var footprint = "https://upload.wikimedia.org/wikipedia/commons/9/9a/Barfotrevyenslogo.jpg";
     let imgSrc = (step == "start") ? redSquare :
       (step == "end") ? cyanSquare :
       (step == "obstruction") ? woodenFence:
@@ -21,40 +26,18 @@
       "dontknow";
     return imgSrc;
   }
-  function demoDisplayFunction(){
-    alert("In demoDisplayFunction");
-    $.get( "http://127.0.0.1:8080/demo", function(data) {
-      alert("Data stepsInRoute=" + data.stepsInRoute);
-      $("body")
-        .append("<p>stepsInRoute=" + data.stepsInRoute + "</p>");
-      $("body").append("<div><table>")
-      $.each( data.maze, function(rowNum, statusArray) {
-        alert("(row):" + rowNum + ": " + statusArray);
-        $("body").append("<tr>");
-        $.each(statusArray, function(column, stati){
-            for (let k in stati) {
-              alert(column + ":" + k + ":" + stati[k]);// k is "status"
-              $("body").append("<td><img src=\"" + calcImageSrc(stati[k]) + "\" alt=\"" + stati[k]
-                  + "\" border=1 height=20 width=20></img></td>");
-            }
-        })
-        $("body").append("</tr>");
-      });
-      $("body").append("</table></div>");
-    }, "json");
-  }
-  function mazeDisplayFunction(mazeNum){
+  function mazeDisplayFunction(mazeNum, desc){
     var url = "http://127.0.0.1:8080/solve/" + mazeNum;
-    alert("run with url = " + url);
     $.get( url, function(data) {
+      $("body").append("<h1>" + desc + "<h1>");
       $("body")
-        .append("<p>stepsInRoute=" + data.stepsInRoute + "</p>");
-      $("body").append("<div><table>")
+        .append("<h2><p><div class=\"m_steps\">stepsInRoute:" + data.stepsInRoute + "</div></p><h2>");
+      $("body").append("<div><table>");
       $.each( data.maze, function(rowNum, statusArray) {
         $("body").append("<tr>");
         $.each(statusArray, function(column, stati){
             for (let k in stati) {
-              $("body").append("<td><img src=\"" + calcImageSrc(stati[k]) + "\" alt=\"" + stati[k]
+              $("body").append("<td class=\"maze\"><img src=\"" + calcImageSrc(stati[k]) + "\" alt=\"" + stati[k]
                   + "\" border=1 height=20 width=20></img></td>");
             }
         })
@@ -66,15 +49,15 @@
 </script>
 </head>
 <body>
-<!-- <p><button>Test demo</button></p>
--->
-<p onclick="demoDisplayFunction()"><button>Solve Demo Maze</button></p>
-<table>
+  <div class="picker">
+    <p><h2>Select a Maze to Solve and Display</h2></p>
+ <table>
   <tr>
-    <td><div onclick="mazeDisplayFunction(1)"><button>Solve Small Maze</button></td>
-    <td></div><div onclick="mazeDisplayFunction(2)"><button>Solve Medium Maze</button></div></td>
-    <td><div onclick="mazeDisplayFunction(3)"><button>Solve Large Maze</button></div></td>
+    <td class="picker"><div onclick="mazeDisplayFunction(1, 'Small Maze')"><button class="picker" >Solve Small Maze</button></div></td>
+    <td class="picker"><div onclick="mazeDisplayFunction(2, 'Medium Maze')"><button class="picker">Solve Medium Maze</button></div></td>
+    <td class="picker"><div onclick="mazeDisplayFunction(3, 'Large Maze')"><button class="picker">Solve Large Maze</button></div></td>
   </tr>
-  </table>
+ </table>
+ </div>
 </body>
 </html>
