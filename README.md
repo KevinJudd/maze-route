@@ -30,6 +30,7 @@ MNMINOF2MAC007:logs kjudd$
 
 # Build and run the application on your computer.
 ```bash
+> cd maze-route
 > mvn clean package
 > mvn spring-boot:run
 ```
